@@ -1,0 +1,22 @@
+{
+    "name": "xddesigners/shop-affiliate-marketing",
+    "description": "Adds affiliate marketing s2s postback support to SilverShop orders",
+    "type": "silverstripe-vendormodule",
+    "keywords": ["SilverStripe", "SilverShop", "Affiliate", "Marketing"],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Bram de Leeuw",
+            "email": "bram@xd.nl"
+        }
+    ],
+    "require": {
+        "silverstripe/framework": ">=4.0",
+        "silverstripe/cms": ">=4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "XD\\Shop\\AffiliateMarketing\\": "src"
+        }
+    }
+}

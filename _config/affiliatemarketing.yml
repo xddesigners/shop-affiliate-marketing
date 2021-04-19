@@ -1,0 +1,12 @@
+---
+Name: xdshop_affiliatemarketing
+---
+SilverStripe\Core\Injector\Injector:
+  AffiliateProvider:
+    class: XD\Shop\AffiliateMarketing\Providers\HasOffers
+SilverShop\Model\Order:
+  extensions:
+    - XD\Shop\AffiliateMarketing\Extensions\OrderExtension
+SilverStripe\Control\Controller:
+  extensions:
+    - XD\Shop\AffiliateMarketing\Extensions\ControllerExtension
