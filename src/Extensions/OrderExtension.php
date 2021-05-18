@@ -15,6 +15,18 @@ use XD\Shop\AffiliateMarketing\Providers\AffiliateProvider;
  */
 class OrderExtension extends DataExtension
 {
+    private static $db = [
+        'AffiliateMarketingTransactionID' => 'Text'
+    ];
+
+    public function onPlaceOrder()
+    {
+        if (($controller = Controller::curr()) && $request = $controller->getRequest()) {
+            $provider = Injector::inst()->create('AffiliateProvider');
+            $provider->storeTransactionID($request, $this->owner);
+        }
+    }
+
     public function onPaid()
     {
         if (($controller = Controller::curr()) && $request = $controller->getRequest()) {

@@ -20,4 +20,12 @@ abstract class AffiliateProvider
      * @throws PostbackFailedException
      */
     abstract public function doPostBack(HTTPRequest $request, Order $order);
+
+    /**
+     * Store the transaction id on the order so we dont lose the session
+     * Only usefull when Order.place_before_payment is set to true
+     */
+    public function storeTransactionID(HTTPRequest $request, Order $order)
+    {
+    }
 }

@@ -48,7 +48,12 @@ class HasOffers extends AffiliateProvider
             return;
         }
 
-        if ($transactionId = $session->get(self::TRANSACTION_SESSION_KEY)) {
+        // Get the transaction id from the db or session
+        if (!$transactionId = $order->AffiliateMarketingTransactionID) {
+            $transactionId = $session->get(self::TRANSACTION_SESSION_KEY);
+        }
+
+        if ($transactionId) {
             $query = [
                 'offer_id' => self::config()->get('default_offer_id'),
                 'transaction_id' => $transactionId,
@@ -67,6 +72,20 @@ class HasOffers extends AffiliateProvider
             } catch (GuzzleException $e) {
                 throw new PostbackFailedException($e->getMessage(), $e->getCode(), $e);
             }
+        }
+    }
+
+    /**
+     * Store the transaction id in the db
+     */
+    public function storeTransactionID(HTTPRequest $request, Order $order)
+    {
+        if (!$request || !($session = $request->getSession())) {
+            return;
+        }
+
+        if ($transactionId = $session->get(self::TRANSACTION_SESSION_KEY)) {
+            $order->AffiliateMarketingTransactionID = $transactionId;
         }
     }
 }
