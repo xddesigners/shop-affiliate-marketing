@@ -57,7 +57,7 @@ class HasOffers extends AffiliateProvider
             $query = [
                 'offer_id' => self::config()->get('default_offer_id'),
                 'transaction_id' => $transactionId,
-                'adv_sub' => $order->MemberID
+                'adv_sub' => substr(sha1($order->getLatestEmail()), 0, 16)
             ];
 
             $this->extend('onBeforePostBack', $query, $order);
